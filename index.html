@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baticnova - Bienvenue</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121212;
+            color: #00d1b2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        #loading-screen h1 {
+            font-size: 5rem;
+            margin: 0;
+            position: relative;
+            animation: moveAndBounce 3s infinite alternate;
+        }
+
+        #loading-screen .progress-bar {
+            margin-top: 20px;
+            width: 80%;
+            height: 10px;
+            background-color: #1e1e1e;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #loading-screen .progress-bar div {
+            width: 0;
+            height: 100%;
+            background-color: #00d1b2;
+            animation: load 3s linear forwards;
+        }
+
+        @keyframes moveAndBounce {
+            0% { transform: translateY(-50px); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(-50px); }
+        }
+
+        @keyframes load {
+            100% {
+                width: 100%;
+            }
+        }
+
+        header {
+            text-align: center;
+            margin: 30px auto;
+            animation: fadeIn 2s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #00d1b2;
+            text-shadow: 0 0 20px #00d1b2, 0 0 40px #00d1b2;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            background-color: #00d1b2;
+            color: #121212;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .button:hover {
+            background-color: #00a892;
+            transform: scale(1.1);
+        }
+
+        .tips {
+            margin-top: 40px;
+            text-align: center;
+            padding: 10px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+            max-width: 500px; /* Limite la largeur du bloc */
+            width: 100%; /* Prend 100% de la largeur */
+            margin-left: auto; /* Centre horizontalement */
+            margin-right: auto; /* Centre horizontalement */
+            animation: fadeIn 2s ease-out;
+        }
+
+        .tips h2 {
+            color: #00d1b2;
+            font-size: 1.5rem;
+        }
+
+        .tips p {
+            font-size: 1rem;
+            color: #b0b0b0;
+        }
+
+        /* Effet de pluie */
+        .rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .drop {
+            position: absolute;
+            background-color: rgba(0, 209, 178, 0.7);
+            width: 2px;
+            height: 10px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 2; }
+        }
+
+        #main-content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-screen">
+        <h1>Baticnova</h1>
+        <div class="progress-bar">
+            <div></div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <header>
+            <h1>Baticnova</h1>
+            <p>La technologie de demain à portée de main. Site en construction, restez connectés !</p>
+            <p><strong>Note :</strong> Nous ne sommes pas encore une entreprise, aucun service n'est disponible pour le moment.</p>
+        </header>
+
+        <div class="buttons">
+            <button class="button" onclick="window.location.href='mailto:craftmineur@outlook.fr'">Nous contacter</button>
+            <button class="button">En savoir plus</button>
+        </div>
+
+        <div class="tips">
+            <h2>Astuce du jour :</h2>
+            <p id="tip">Chargement des astuces...</p>
+        </div>
+    </div>
+
+    <div class="rain"></div>
+
+    <script>
+        // Page loading screen
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById("loading-screen").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            }, 3000); // 3 seconds loading time
+        };
+
+        // Tips logic
+        const tips = [
+            "Utilisez 'Ctrl + Shift + T' pour rouvrir un onglet fermé sur votre navigateur.",
+            "Sur Android, activez le mode économie d'énergie pour prolonger l'autonomie de la batterie.",
+            "Sur iPhone, balayez vers la gauche ou la droite avec trois doigts pour annuler ou rétablir une action.",
+            "Personnalisez les raccourcis clavier sur Windows pour un accès plus rapide à vos applications préférées.",
+            "Sur Android, accédez aux options pour développeurs en tapant 7 fois sur le numéro de build dans les paramètres.",
+            "Sur Windows, nettoyez votre disque en tapant 'Nettoyage de disque' dans le menu démarrer.",
+            "Sur iOS, désactivez les mises à jour automatiques des applications pour économiser la batterie.",
+            "Sur Android, installez un gestionnaire de fichiers pour mieux gérer vos données."
+        ];
+
+        const tipElement = document.getElementById("tip");
+        const randomTip = tips[Math.floor(Math.random() * tips.length)];
+        tipElement.textContent = randomTip;
+
+        // Effet de pluie
+        function createRaindrop() {
+            const drop = document.createElement("div");
+            drop.classList.add("drop");
+            drop.style.left = `${Math.random() * 100}%`;
+            drop.style.animationDuration = `${Math.random() * 1 + 1}s`;
+            document.querySelector(".rain").appendChild(drop);
+
+            setTimeout(() => {
+                drop.remove();
+            }, 2000); // Durée de vie de chaque goutte
+        }
+
+        setInterval(createRaindrop, 100); // Crée une nouvelle goutte chaque 100ms
+    </script>
+</body>
+</html>
